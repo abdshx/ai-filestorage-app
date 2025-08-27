@@ -72,8 +72,9 @@ export function FileCard({ file, onDownload, onShare, onDelete, onView }: FileCa
 
   // TODO: Implement actual file operations with backend API
   const handleDownload = () => {
-    console.log("Downloading file:", file.id)
-    onDownload?.(file.id)
+    const downloadUrl = `/api/downloadFile?fileId=${file.id}`;
+    window.open(downloadUrl, "_blank");
+    onDownload?.(file.id);
   }
 
   const handleShare = () => {
