@@ -8,7 +8,6 @@
     "rootDir": ".",
     "esModuleInterop": true,
     "strict": true,
-    "typeRoots": ["./node_modules/@types", "./types"],
     "types": ["node", "node-fetch"]
   },
   "include": ["**/*.ts"],
