@@ -4,7 +4,6 @@ import { Worker } from 'bullmq';
 import Redis from 'ioredis';
 import { createClient } from '@supabase/supabase-js';
 import fetch from 'node-fetch';
-import vision from '@google-cloud/vision';
 import { GoogleGenerativeAI } from "@google/generative-ai";
 import pdf from 'pdf-parse';
 import mammoth from 'mammoth';
@@ -19,7 +18,6 @@ const supabaseServiceRoleKey = process.env.SUPABASE_SERVICE_ROLE_KEY!;
 const geminiApiKey = process.env.GEMINI_API_KEY!;
 
 const supabaseAdmin = createClient(supabaseUrl, supabaseServiceRoleKey);
-const visionClient = new vision.ImageAnnotatorClient();
 const genAI = new GoogleGenerativeAI(geminiApiKey);
 
 // Function to parse PDF/text content
@@ -68,15 +66,16 @@ const worker = new Worker(
     const mimeType = response.headers.get('content-type');
     console.log(`Detected MIME type: ${mimeType}`);
 
-    if (mimeType?.startsWith('image/')) {
-      // Google Vision for images
-      const [result] = await visionClient.labelDetection(fileBuffer);
-      const labels = result.labelAnnotations;
-      if (labels) {
-        tags = labels.map(label => label.description!).filter(Boolean) as string[];
-      }
-      console.log(`Image analysis for ${filePath}: Tags - ${tags.join(', ')}`);
-    } else if (mimeType?.startsWith('application/pdf') || mimeType?.startsWith('text/') || mimeType === 'application/vnd.openxmlformats-officedocument.wordprocessingml.document') {
+    // if (mimeType?.startsWith('image/')) {
+    //   // Google Vision for images
+    //   const [result] = await visionClient.labelDetection(fileBuffer);
+    //   const labels = result.labelAnnotations;
+    //   if (labels) {
+    //     tags = labels.map(label => label.description!).filter(Boolean) as string[];
+    //   }
+    //   console.log(`Image analysis for ${filePath}: Tags - ${tags.join(', ')}`);
+    // } 
+     if (mimeType?.startsWith('application/pdf') || mimeType?.startsWith('text/') || mimeType === 'application/vnd.openxmlformats-officedocument.wordprocessingml.document') {
       // Gemini for PDFs/Text
       const fileContent = await parseFileContent(fileBuffer, fileType);
       console.log("Parsed file content length:", fileContent.length);

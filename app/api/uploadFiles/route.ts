@@ -77,14 +77,21 @@ export async function POST(req: Request) {
       // Don’t fail upload just because metadata failed
     }
 
-    // Dispatch AI processing job
-    if (fileRecord) {
+    // Dispatch AI processing job only if it's not an image
+    if (fileRecord && !file.type.startsWith('image/')) {
       await aiProcessQueue.add('process-file', {
         fileId: fileRecord.id,
         filePath: filePath,
         fileType: fileExtension,
       });
       console.log(`Dispatched AI processing job for file ${fileRecord.id}`);
+    } else if (fileRecord && file.type.startsWith('image/')) {
+      console.log(`Skipping AI processing for image file ${fileRecord.id}`);
+      // Optionally, update the status to 'ready' immediately for images if no other AI processing is intended
+      await supabaseAdmin
+        .from('files')
+        .update({ status: 'ready', processed_at: new Date().toISOString() })
+        .eq('id', fileRecord.id);
     }
 
     return NextResponse.json({
