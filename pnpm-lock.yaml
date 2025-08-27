@@ -153,8 +153,8 @@ importers:
         specifier: latest
         version: 0.4.6(react-dom@19.1.1(react@19.1.1))(react@19.1.1)
       node-fetch:
-        specifier: ^3.3.2
-        version: 3.3.2
+        specifier: ^2.7.0
+        version: 2.7.0
       openai:
         specifier: ^5.15.0
         version: 5.15.0(ws@8.18.3)(zod@3.25.67)
@@ -213,6 +213,9 @@ importers:
       '@types/node':
         specifier: ^22
         version: 22.17.2
+      '@types/node-fetch':
+        specifier: ^2.6.13
+        version: 2.6.13
       '@types/pdf-parse':
         specifier: ^1.1.5
         version: 1.1.5
@@ -1427,6 +1430,9 @@ packages:
   '@types/d3-timer@3.0.2':
     resolution: {integrity: sha512-Ps3T8E8dZDam6fUyNiMkekK3XUsaUEik+idO9/YjPtfj2qruF8tFBXS7XhtE4iIXBLxhmLjP3SXpLhVf21I9Lw==}
 
+  '@types/node-fetch@2.6.13':
+    resolution: {integrity: sha512-QGpRVpzSaUs30JBSGPjOg4Uveu384erbHBoT1zeONvyCfwQxIkUshLAOqN/k9EjGviPRmWTTe6aH2qySWKTVSw==}
+
   '@types/node@22.17.2':
     resolution: {integrity: sha512-gL6z5N9Jm9mhY+U2KXZpteb+09zyffliRkZyZOHODGATyC5B1Jt/7TzuuiLkFsSUMLbS1OLmlj/E+/3KF4Q/4w==}
 
@@ -2124,6 +2130,15 @@ packages:
 
   node-ensure@0.0.0:
     resolution: {integrity: sha512-DRI60hzo2oKN1ma0ckc6nQWlHU69RH6xN0sjQTjMpChPfTYvKZdcQFfdYK2RWbJcKyUizSIy/l8OTGxMAM1QDw==}
+
+  node-fetch@2.7.0:
+    resolution: {integrity: sha512-c4FRfUm/dbcWZ7U+1Wq0AwCyFL+3nt2bEw05wfxSz+DWpWsitgmSgYmy2dQdWyKC1694ELPqMs/YzUSNozLt8A==}
+    engines: {node: 4.x || >=6.0.0}
+    peerDependencies:
+      encoding: ^0.1.0
+    peerDependenciesMeta:
+      encoding:
+        optional: true
 
   node-fetch@3.3.2:
     resolution: {integrity: sha512-dRB78srN/l6gqWulah9SrxeYnxeddIG30+GOqK/9OlLVyLg3HPnr6SqOWTWOXKRwC2eGYCkZ59NNuSgvSrpgOA==}
@@ -3732,6 +3747,11 @@ snapshots:
 
   '@types/d3-timer@3.0.2': {}
 
+  '@types/node-fetch@2.6.13':
+    dependencies:
+      '@types/node': 22.17.2
+      form-data: 4.0.4
+
   '@types/node@22.17.2':
     dependencies:
       undici-types: 6.21.0
@@ -4427,6 +4447,10 @@ snapshots:
   node-domexception@1.0.0: {}
 
   node-ensure@0.0.0: {}
+
+  node-fetch@2.7.0:
+    dependencies:
+      whatwg-url: 5.0.0
 
   node-fetch@3.3.2:
     dependencies:
