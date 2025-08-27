@@ -3,7 +3,7 @@ require('dotenv').config({ path: '.env' });
 import { Worker } from 'bullmq';
 import Redis from 'ioredis';
 import { createClient } from '@supabase/supabase-js';
-import fetch from 'node-fetch';
+import * as fetch from 'node-fetch';
 import { GoogleGenerativeAI } from "@google/generative-ai";
 import pdf from 'pdf-parse';
 import mammoth from 'mammoth';
@@ -50,7 +50,7 @@ const worker = new Worker(
       throw new Error(`Error creating signed URL: ${signedUrlError.message}`);
     }
 
-    const response = await fetch(signedUrlData.signedUrl);
+    const response = await fetch.default(signedUrlData.signedUrl);
     if (!response.ok) {
       throw new Error(`Failed to download file: ${response.statusText}`);
     }
