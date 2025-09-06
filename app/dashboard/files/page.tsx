@@ -148,7 +148,7 @@ export default function FilesPage() {
   }
 
   useEffect(() => {
-    fetchFilesAndFolders()
+    fetchFilesAndFolders();
   }, [])
 
   // TODO: Implement actual file operations with Supabase storage
